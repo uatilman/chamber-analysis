@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@RestController
+//@RestController
 @SpringBootApplication
 public class ChamberAnalysisApplication {
 
@@ -14,8 +14,8 @@ public class ChamberAnalysisApplication {
         SpringApplication.run(ChamberAnalysisApplication.class, args);
     }
 
-    @RequestMapping("/test")
+/*    @RequestMapping("/test")
     public String test() {
         return "test";
-    }
+    }*/
 }
