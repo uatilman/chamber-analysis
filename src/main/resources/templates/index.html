@@ -1,16 +1,20 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <title>Spring Boot and Thymeleaf example</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <link rel="stylesheet" href="css/style.css"/>
 </head>
+
 <body>
+<div class="container">
 
-<div th:replace="fragments :: header"></div>
+    <div th:replace="fragments :: header"></div>
 
-<div class="padding-site product-table">
-    <h3 th:text="${chambersCount}"></h3>
+    <div class="padding-site product-table">
+
+        <h3 th:text="${chambersCount}"></h3>
 
         <table border="1">
 
@@ -29,10 +33,13 @@
                 <td class="description-column" th:text="${item.address}"></td>
             </tr>
             </tbody>
-
         </table>
 
+        <div th:replace="fragments :: footer"></div>
+
+    </div>
 </div>
+
 
 </body>
 </html>
