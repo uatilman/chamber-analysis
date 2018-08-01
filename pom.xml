@@ -28,6 +28,13 @@
 
     <dependencies>
 
+        <!-- https://mvnrepository.com/artifact/com.google.guava/guava -->
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>25.1-jre</version>
+        </dependency>
+
         <!--        &lt;!&ndash; https://mvnrepository.com/artifact/org.thymeleaf/thymeleaf-spring4 &ndash;&gt;
                 <dependency>
                     <groupId>org.thymeleaf</groupId>

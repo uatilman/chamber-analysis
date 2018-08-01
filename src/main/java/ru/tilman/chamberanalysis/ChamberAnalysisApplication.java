@@ -5,10 +5,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.support.ResourceBundleMessageSource;
 
-//@RestController
+
 @SpringBootApplication
 public class ChamberAnalysisApplication {
-
 
     public static void main(String[] args) {
         SpringApplication.run(ChamberAnalysisApplication.class, args);
@@ -22,8 +21,5 @@ public class ChamberAnalysisApplication {
         return messageSource;
     }
 
-/*    @RequestMapping("/test")
-    public String test() {
-        return "test";
-    }*/
+
 }

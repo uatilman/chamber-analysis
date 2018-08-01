@@ -12,7 +12,8 @@ import ru.tilman.chamberanalysis.repository.ChamberRepository;
 import java.util.List;
 import java.util.Locale;
 
-@Controller(value = "indexController")
+
+@Controller
 public class IndexController {
 
     private final static String CHAMBERS_COUNT_ATTRIBUTE = "chambersCount";
@@ -41,7 +42,10 @@ public class IndexController {
         return "index";
     }
 
-    public static String getChambersCountAttribute() {
-        return CHAMBERS_COUNT_ATTRIBUTE;
+    @RequestMapping("/chambers")
+    public String welcome() {
+
+        return "chambers";
     }
+
 }

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Spring Boot and Thymeleaf example</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" href="css/style.css"/>
+
+    <script>
+        var chamberBody =
+            "                    <tr class='click-row' data-href=''>" +
+            "                        <td class='id-column'></td>" +
+            "                        <td class='name-column'></td>" +
+            "                        <td class='address-column'></td>" +
+            "                    </tr>";
+        var number = 20;
+        var order = "ASC";
+        var orderBy = "name";
+        var pageCounter = 0;
+    </script>
+
+    <script language="JavaScript" type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.js"></script>
+    <script language="JavaScript" type="text/javascript" src="getData.js"></script>
+
+</head>
+
+<body>
+<div class="container">
+
+    <div th:replace="fragments :: header"></div>
+
+    <div class="padding-site product-table">
+
+
+        <table border="1" class="chamber-table">
+            <thead>
+            <tr>
+                <td><strong>ID</strong></td>
+                <td><strong>NAME</strong></td>
+                <td><strong>ADDRESS</strong></td>
+            </tr>
+            </thead>
+
+            <tbody>
+
+            </tbody>
+        </table>
+
+        <div th:replace="fragments :: footer"></div>
+
+    </div>
+</div>
+
+
+</body>
+</html>
