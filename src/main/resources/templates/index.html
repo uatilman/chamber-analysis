@@ -7,12 +7,11 @@
 </head>
 <body>
 
+<div th:replace="fragments :: header"></div>
+
 <div class="padding-site product-table">
-    <h3>Products</h3>
-    <p>Интернацианализирвоанные сообщения</p>
-    <p>Из атрибута установленного в контроллере</p><span th:text="${testModel}"></span>
-    <br>
-    <p>Напрямую из html страницы</p><span th:text="#{welcome.message}"></span>
+    <h3 th:text="${chambersCount}"></h3>
+
         <table border="1">
 
             <thead>

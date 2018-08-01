@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Spring Boot and Thymeleaf example</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" href="css/style.css"/>
+
+</head>
+<body>
+
+<header th:fragment="header" class="padding-site">
+    <div class="header">
+        <nav>
+            <ul class="menu">
+                <li><a href="hi">test</a></li>
+                <li><a href="#">other</a></li>
+                <li><img class="lang-icon" th:src="'img/' + ${#locale} + '.png'" alt="lang" src="1.png"></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+
+</body>
+</html>
