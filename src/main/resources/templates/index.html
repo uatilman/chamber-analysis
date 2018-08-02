@@ -16,21 +16,21 @@
 
         <h3 th:text="${chambersCount}"></h3>
 
-        <table border="1">
+        <table border="1" class="chamber-table">
 
             <thead>
             <tr>
-                <td>ID</td>
-                <td>NAME</td>
-                <td>ADDRESS</td>
+                <th>ID</th>
+                <th>NAME</th>
+                <th>ADDRESS</th>
             </tr>
             </thead>
 
             <tbody>
-            <tr th:each="item : ${chambers}">
-                <td class="order-product-id" th:text="${item.id}" th:col="ID"></td>
+            <tr class="click-row" th:each="item : ${chambers}">
+                <td class="id-column" th:text="${item.id}" th:col="ID"></td>
                 <td class="name-column" th:text="${item.name}"></td>
-                <td class="description-column" th:text="${item.address}"></td>
+                <td class="address-column" th:text="${item.address}"></td>
             </tr>
             </tbody>
         </table>

@@ -14,10 +14,6 @@ body {
     font-family: 'Montserrat', sans-serif;
 }
 
-h3 {
-    margin: 20px 185px;
-}
-
 .container {
     max-width: 1366px;
     flex-direction: column;
@@ -48,10 +44,9 @@ h3 {
 
 .header {
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
     position: relative;
-    margin-bottom: 25px;
-    background-color: #f9f9f9;
+    margin-bottom: 50px;
 }
 
 .header-contacts h2 {
@@ -73,9 +68,9 @@ h3 {
 }
 
 .menu {
-    display: flex;
-    list-style-type: none;
-    margin-top: 57px;
+    display: flex !important;
+    list-style-type: none !important;
+    margin-top: 57px !important;
 }
 
 .menu a {
@@ -84,7 +79,6 @@ h3 {
     font-size: 14px;
     font-weight: 300;
     text-decoration: none;
-    text-transform: uppercase;
 }
 
 .menu a:hover {
@@ -500,8 +494,6 @@ nav {
     text-decoration: none;
     text-transform: uppercase;
     letter-spacing: 3.6px;
-    margin: 0 25px 0 0;
-    width: 200px;
 }
 
 .order-button:hover {
@@ -511,12 +503,6 @@ nav {
 .order-button:active {
     position: relative;
     top: 2px;
-}
-
-.button-panel {
-    display: flex;
-    justify-content: flex-start;
-    margin: 25px 0;
 }
 
 .hot-deal {
@@ -721,12 +707,8 @@ nav {
 }
 
 .footer {
-    /*height: 384px;*/
-    background-color: #f9f9f9;
-}
-
-footer {
-    margin: 20px 98px 0 98px;
+    height: 384px;
+    background-color: #f7f7f7;
 }
 
 .footer-top {
@@ -1000,63 +982,10 @@ button .svg-inline--fa.fa-w-14:hover {
 }
 
 .error {
-    color: red;
-}
-
-.chamber-table {
-    width: 800px;
-    margin: 20px 185px;
-    border-width: 1px;
-}
-
-.chamber-table tbody tr:nth-last-of-type(2n) {
-    background-color: #c7c7c7;
-}
-
-.chamber-table tbody tr:hover {
-    background-color: #adadad;
-    cursor: pointer;
-}
-
-.chamber-table .id-column {
-    width: 50px;
-}
-
-.chamber-table .name-column {
-    width: 300px;
-}
-
-.chamber-table .region-name-column {
-    width: 200px;
-}
-
-.chamber-table .district-name-column {
-    width: 100px;
-}
-
-.chamber-table .edit-column {
-    width: 150px;
-}
-
-.table-head {
-    margin: 10px 185px;
-}
-
-.lang-icon {
-    position: absolute;
-    width: 45px;
-    top: 10px;
-    left: 15px;
-    cursor: pointer;
-}
-
-.login {
-    width: 800px;
-    margin: 10px 185px;
-    border-width: 1px;
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    justify-content: center;
+    margin-top: 100px;
+    margin-bottom: 100px;
 }
 
 .login-body {
@@ -1064,11 +993,17 @@ button .svg-inline--fa.fa-w-14:hover {
     background-size: 100%
 }
 
-.login h2 {
-    margin-bottom: 25px;
+.login {
+    position: absolute;
+    top: 50%;
+    left: 20%;
+    text-align: center;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+
 }
 
-.login input {
+.login input, .login textarea {
     margin-bottom: 30px;
     width: 200px;
     border-radius: 22.5px;
@@ -1080,13 +1015,14 @@ button .svg-inline--fa.fa-w-14:hover {
     font-weight: 700;
     text-align: center;
     text-decoration: none;
+    text-transform: uppercase;
     letter-spacing: 3.6px;
+    resize: none;
 }
 
 .login-button {
     width: 100px;
     background-color: #f7f7f7;
-    margin-bottom: 30px;
 
 }
 
@@ -1099,10 +1035,61 @@ button .svg-inline--fa.fa-w-14:hover {
     top: 2px;
 }
 
-.login input:active, .login input:focus {
+.login input:active, .login input:focus, .login textarea:active, .login textarea:focus {
     outline: none;
 }
 
-.login input:focus {
+.login input:focus, .login textarea:focus {
     background-color: antiquewhite;
+}
+
+.product-table {
+    width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.product-table .category-column {
+    width: 70px;
+}
+
+.product-table .name-column {
+    width: 100px;
+}
+
+.product-table .description-column {
+    width: 306px;
+}
+
+.product-table .image-column {
+    width: 100px;
+}
+
+.product-table .image-column img {
+    width: 98px;
+}
+
+.remove-column {
+    width: 100px;
+}
+
+.count-column input {
+    width: 50px;
+}
+
+.order-product-number, .order-product-id, .count-column {
+    width: 60px;
+}
+
+.order-product-number, .order-product-id, .count-column, .count-column input, .count-column textarea, .total-column, remove-column {
+    text-align: center;
+}
+
+.total-column {
+    width: 100px;
+}
+
+thead tr td {
+    font-weight: bold;
+    text-align: center;
 }

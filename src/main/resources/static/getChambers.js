@@ -1,3 +1,14 @@
+var chamberBody =
+    "                    <tr class='click-row' data-href=''>" +
+    "                        <td class='id-column'></td>" +
+    "                        <td class='name-column'></td>" +
+    "                        <td class='address-column'></td>" +
+    "                    </tr>";
+var size = 20;
+var order = "ASC";
+var orderBy = "name";
+var pageNumber = 0;
+
 function renderingChambers(chambers) {
     chambers.forEach(function (chamber) {
         var test = $(chamberBody)
@@ -15,20 +26,22 @@ function renderingChambers(chambers) {
     });
 }*/
 function loadChambers() {
-    var data = "pageCounter=" + pageCounter + "&" + "order=" + order + "&" + "orderBy=" + orderBy + "&" + "number=" + number;
+    var data = "pageNumber=" + pageNumber + "&" + "order=" + order + "&" + "orderBy=" + orderBy + "&" + "size=" + size;
 
     $.ajax({
         url: '/getChambers',
         type: 'GET',
         data: data,
         cache: false,
-        success: function (chambersResponsive) {
-            if (chambersResponsive !== 0) {
-                renderingChambers(chambersResponsive["chambers"]);
-                // setRowClickListener();
-                pageCounter++;
+        success: [
+            function (chambersResponsive) {
+                if (chambersResponsive !== 0) {
+                    renderingChambers(chambersResponsive["chambers"]);
+                    // setRowClickListener();
+                    pageNumber++;
+                }
             }
-        }
+        ]
     });
 }
 

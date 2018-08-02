@@ -42,6 +42,11 @@ public class IndexController {
         return "index";
     }
 
+    @RequestMapping("/hi")
+    public String test() {
+        return "hi";
+    }
+
     @RequestMapping("/chambers")
     public String welcome() {
 
