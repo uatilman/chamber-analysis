@@ -1,18 +1,26 @@
-var chamberBody =
-    "                    <tr class='click-row' data-href=''>" +
-    "                        <td class='id-column'></td>" +
-    "                        <td class='name-column'></td>" +
-    "                        <td class='address-column'></td>" +
-    "                    </tr>";
-var size = 20;
-var order = "ASC";
-var orderBy = "name";
-var pageNumber = 0;
+const size = 20;
+const order = "ASC";
+const orderBy = "name";
+const pageNumber = 0;
+let chamberBody;
+
+$(document).ready(
+    function () {
+        loadChambers();
+        chamberBody = $(`.click-row`).clone();
+        $('.click-row').remove();
+        $(window).scroll(function () {
+            if ($(window).scrollTop() === $(document).height() - $(window).height()) {
+                loadChambers();
+            }
+        });
+    }
+);
+
 
 function renderingChambers(chambers) {
-    $('.id-column').last().html("test");
     chambers.forEach(function (chamber) {
-        var test = $(chamberBody)
+        var test = $(chamberBody).clone()
             .find(".id-column").html(chamber["id"]).end()
             .find(".name-column").html(chamber["name"]).end()
             .find(".address-column").html(chamber["address"]).end();
@@ -48,17 +56,6 @@ function loadChambers() {
 }
 
 
-$(document).ready(
-    function () {
-        loadChambers();
-
-        $(window).scroll(function () {
-            if ($(window).scrollTop() === $(document).height() - $(window).height()) {
-                loadChambers();
-            }
-        });
-    }
-);
 
 
 

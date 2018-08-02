@@ -5,7 +5,6 @@
     <title>Spring Boot and Thymeleaf example</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <link rel="stylesheet" href="css/style.css"/>
-
     <script language="JavaScript" type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.js"></script>
     <script language="JavaScript" type="text/javascript" src="/getChambers.js"></script>
 
@@ -20,28 +19,24 @@
 
 
         <table border="1" class="chamber-table">
+
             <thead>
-            <tr>
-                <th><strong>ID</strong></th>
-                <th><strong>NAME</strong></th>
-                <th><strong>ADDRESS</strong></th>
-            </tr>
+                <tr>
+                    <th><strong>ID</strong></th>
+                    <th><strong>NAME</strong></th>
+                    <th><strong>ADDRESS</strong></th>
+                </tr>
             </thead>
 
             <tbody>
-            <tr class='click-row' data-href=''>
-                <td class='id-column'></td>
-                <td class='name-column'></td>
-                <td class='address-column'></td>
-            </tr>
-            <tr class='click-row' data-href=''>
-                <td class='id-column'></td>
-                <td class='name-column'></td>
-                <td class='address-column'></td>
-            </tr>
-
-
+                <!--прототип строки для javascript-->
+                <tr class='click-row' data-href=''>
+                    <td class='id-column'></td>
+                    <td class='name-column'></td>
+                    <td class='address-column'></td>
+                </tr>
             </tbody>
+
         </table>
 
         <div th:replace="fragments :: footer"></div>
