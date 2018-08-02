@@ -12,9 +12,11 @@ import org.springframework.web.bind.annotation.RestController;
 import ru.tilman.chamberanalysis.entity.Chamber;
 import ru.tilman.chamberanalysis.repository.ChamberRepository;
 
+import java.util.Collections;
 import java.util.List;
 
 @RestController
+@RequestMapping("rest")
 public class RestChambersController {
 
     private final ChamberRepository chamberRepository;
@@ -25,12 +27,17 @@ public class RestChambersController {
     }
 
     @RequestMapping("/getChambers")
-    public ChamberAjax getChambersList(
+    public List<Chamber> getChambersList(
             @RequestParam(value = "pageNumber", defaultValue = "0") Integer pageNumber,
             @RequestParam(value = "size", defaultValue = "-1") Integer size,
             @RequestParam(value = "order", defaultValue = "ASC") String order,
-            @RequestParam(value = "orderBy", defaultValue = "id") String orderBy
+            @RequestParam(value = "orderBy", defaultValue = "id") String orderBy,
+            @RequestParam(value = "id", defaultValue = "-1") Integer id
     ) {
+        if (id != -1) {
+            return Collections.singletonList(chamberRepository.findById(Long.valueOf(id)).get());
+        }
+
         if (size == -1) size = Math.toIntExact(chamberRepository.count());
 
         Sort sort = null;
@@ -41,9 +48,8 @@ public class RestChambersController {
         PageRequest pageable = PageRequest.of(pageNumber, size, sort);
         Page<Chamber> chamberPage = chamberRepository.findAll(pageable);
 
-        ChamberAjax responsive = new ChamberAjax();
-        responsive.setChambers(Lists.newArrayList(chamberPage.iterator()));
-        return responsive;
+
+        return Lists.newArrayList(chamberPage.iterator());
     }
 
 }

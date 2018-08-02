@@ -6,6 +6,7 @@ import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import ru.tilman.chamberanalysis.entity.Chamber;
 import ru.tilman.chamberanalysis.repository.ChamberRepository;
 
@@ -48,8 +49,10 @@ public class IndexController {
     }
 
     @RequestMapping("/chambers")
-    public String welcome() {
-
+    public String chambers(
+            @RequestParam(value = "id", defaultValue = "-1") Long id
+    ) {
+        if (id != -1) return "view";
         return "chambers";
     }
 

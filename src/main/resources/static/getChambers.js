@@ -10,12 +10,14 @@ var orderBy = "name";
 var pageNumber = 0;
 
 function renderingChambers(chambers) {
+    $('.id-column').last().html("test");
     chambers.forEach(function (chamber) {
         var test = $(chamberBody)
             .find(".id-column").html(chamber["id"]).end()
             .find(".name-column").html(chamber["name"]).end()
             .find(".address-column").html(chamber["address"]).end();
         $(test).appendTo(".chamber-table");
+
     });
 }
 
@@ -29,14 +31,14 @@ function loadChambers() {
     var data = "pageNumber=" + pageNumber + "&" + "order=" + order + "&" + "orderBy=" + orderBy + "&" + "size=" + size;
 
     $.ajax({
-        url: '/getChambers',
+        url: '/rest/getChambers',
         type: 'GET',
         data: data,
         cache: false,
         success: [
             function (chambersResponsive) {
                 if (chambersResponsive !== 0) {
-                    renderingChambers(chambersResponsive["chambers"]);
+                    renderingChambers(chambersResponsive);
                     // setRowClickListener();
                     pageNumber++;
                 }

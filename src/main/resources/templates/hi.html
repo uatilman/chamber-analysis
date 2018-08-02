@@ -13,25 +13,25 @@
     <p>Из атрибута установленного в контроллере</p><span th:text="${testModel}"></span>
     <br>
     <p>Напрямую из html страницы</p><span th:text="#{welcome.message}"></span>
-        <table border="1">
+    <table border="1">
 
-            <thead>
-            <tr>
-                <td>ID</td>
-                <td>NAME</td>
-                <td>ADDRESS</td>
-            </tr>
-            </thead>
+        <thead>
+        <tr>
+            <td>ID</td>
+            <td>NAME</td>
+            <td>ADDRESS</td>
+        </tr>
+        </thead>
 
-            <tbody>
-            <tr th:each="item : ${chambers}">
-                <td class="order-product-id" th:text="${item.id}" th:col="ID"></td>
-                <td class="name-column" th:text="${item.name}"></td>
-                <td class="description-column" th:text="${item.address}"></td>
-            </tr>
-            </tbody>
+        <tbody>
+        <tr th:each="item : ${chambers}">
+            <td class="order-product-id" th:text="${item.id}" th:col="ID"></td>
+            <td class="name-column" th:text="${item.name}"></td>
+            <td class="description-column" th:text="${item.address}"></td>
+        </tr>
+        </tbody>
 
-        </table>
+    </table>
 
 </div>
 
