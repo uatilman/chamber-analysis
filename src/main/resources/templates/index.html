@@ -20,14 +20,14 @@
 
             <thead>
             <tr>
-                <th>ID</th>
-                <th>NAME</th>
-                <th>ADDRESS</th>
+                <th th:text="#{table_chamber_id}"></th>
+                <th th:text="#{table_chamber_name}"></th>
+                <th th:text="#{table_chamber_address}"></th>
             </tr>
             </thead>
 
             <tbody>
-            <tr class="click-row" th:each="item : ${chambers}" th:attr="onclick='document.location = /chambers?id=' + ${item.id}">
+            <tr class="click-row" th:each="item : ${chambers}" th:attr="onclick='document.location = &quot;/chambers?id=' + ${item.id} + '&quot;;'">
                 <td class="id-column" th:text="${item.id}" th:col="ID"></td>
                 <td class="name-column" th:text="${item.name}"></td>
                 <td class="address-column" th:text="${item.address}"></td>
