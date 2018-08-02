@@ -27,7 +27,7 @@
             </thead>
 
             <tbody>
-            <tr class="click-row" th:each="item : ${chambers}">
+            <tr class="click-row" th:each="item : ${chambers}" th:attr="onclick='document.location = /chambers?id=' + ${item.id}">
                 <td class="id-column" th:text="${item.id}" th:col="ID"></td>
                 <td class="name-column" th:text="${item.name}"></td>
                 <td class="address-column" th:text="${item.address}"></td>
