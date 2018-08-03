@@ -6,34 +6,40 @@
     <link rel="stylesheet" href="css/style.css"/>
 </head>
 <body>
+<div class="container">
 
-<div class="padding-site product-table">
-    <h3>Products</h3>
-    <p>Интернацианализирвоанные сообщения</p>
-    <p>Из атрибута установленного в контроллере</p><span th:text="${testModel}"></span>
-    <br>
-    <p>Напрямую из html страницы</p><span th:text="#{welcome.message}"></span>
-    <table border="1">
+    <div th:replace="fragments :: header"></div>
 
-        <thead>
-        <tr>
-            <td>ID</td>
-            <td>NAME</td>
-            <td>ADDRESS</td>
-        </tr>
-        </thead>
+    <div class="padding-site product-table">
+        <h3>Products</h3>
+        <p>Интернацианализирвоанные сообщения</p>
+        <p>Из атрибута установленного в контроллере</p><span th:text="${testModel}"></span>
+        <br>
+        <p>Напрямую из html страницы</p><span th:text="#{welcome.message}"></span>
 
-        <tbody>
-        <tr th:each="item : ${chambers}">
-            <td class="order-product-id" th:text="${item.id}" th:col="ID"></td>
-            <td class="name-column" th:text="${item.name}"></td>
-            <td class="description-column" th:text="${item.address}"></td>
-        </tr>
-        </tbody>
+        <table border="1">
+            <thead>
+            <tr>
+                <td>ID</td>
+                <td>NAME</td>
+                <td>ADDRESS</td>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="item : ${chambers}">
+                <td class="order-product-id" th:text="${item.id}" th:col="ID"></td>
+                <td class="name-column" th:text="${item.name}"></td>
+                <td class="description-column" th:text="${item.address}"></td>
+            </tr>
+            </tbody>
+        </table>
 
-    </table>
+    </div>
+
+    <div th:replace="fragments :: footer"></div>
 
 </div>
+
 
 </body>
 </html>

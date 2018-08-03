@@ -16,7 +16,7 @@
             $(document).ready(
                 function () {
 
-                    let currentLang = '[[${#locale}]]';
+                    var currentLang = '[[${#locale}]]';
                     // alert(currentLang);
                     var data = (currentLang === "ru_RU") ? "en_GB" : "ru_RU";
                     var langImgSrc = 'img/' + currentLang + ".png";
@@ -46,6 +46,8 @@
                 <li><a href="/hi">test</a></li>
                 <li><a href="/chambers">js-table</a></li>
                 <li><a href="/rest/getChambers">restData</a></li>
+                <li><a href="/logout">logout</a></li>
+                <li><a href="/login">login</a></li>
                 <li><img class="lang-icon" alt="lang" src=""></li>
             </ul>
         </nav>

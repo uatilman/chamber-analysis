@@ -1084,10 +1084,7 @@ button .svg-inline--fa.fa-w-14:hover {
 }
 
 .login-button {
-    width: 100px;
-    background-color: #f7f7f7;
-    margin-bottom: 30px;
-
+    margin-left: 35px !important;
 }
 
 .login-button:hover {
