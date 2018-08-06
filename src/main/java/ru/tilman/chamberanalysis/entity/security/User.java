@@ -39,18 +39,12 @@ public class User {
     @Column(name = "login", unique = true)
     private String login;
 
-//    @Pattern(regexp = ".{8,}", message = "{validation.user.password.pattern}")
     @Size(min = 8, message = "{validation.user.password.pattern}")
     @Column(name = "password")
     private String password;
 
     @Column(name = "enabled")
     private boolean enabled;
-
-/*	@JsonIgnore
-	@OneToMany(mappedBy="author", fetch=FetchType.LAZY)
-	private List<Article> articles;
-	*/
 
     public List<Role> getRoleList() {
         return roleList;
@@ -75,14 +69,6 @@ public class User {
     public void setPassword(String password) {
         this.password = password;
     }
-/*
-	public List<Article> getArticles() {
-		return articles;
-	}
-
-	public void setArticles(List<Article> articles) {
-		this.articles = articles;
-	}*/
 
     public Long getId() {
         return id;
@@ -123,4 +109,5 @@ public class User {
     public void setEnabled(boolean enabled) {
         this.enabled = enabled;
     }
+
 }

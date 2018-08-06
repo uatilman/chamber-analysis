@@ -51,20 +51,21 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .authorizeRequests()
 
-                .antMatchers(HttpMethod.GET, "/hi", "/chambers/add/**")
+                .antMatchers(HttpMethod.GET, "/hi", "/rest/remove")
                 .hasAuthority("admins")
 
-                .antMatchers(HttpMethod.GET, "/chambers/todo")
+                .antMatchers(HttpMethod.GET, "/chamber")
                 .hasAnyAuthority("admins", "user")
 
                 .and()
                 .formLogin()
                 .loginPage("/login")
                 .loginProcessingUrl("/login")
+
                 .usernameParameter("login")
                 .passwordParameter("password")
                 .failureUrl("/loginfailed")
-//              .successForwardUrl("/chambers")
+
                 .and()
                 .logout()
                 .logoutSuccessUrl("/chambers");

@@ -1,11 +1,8 @@
 package ru.tilman.chamberanalysis;
 
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.validation.Validator;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
@@ -27,7 +24,6 @@ public class ChamberAnalysisApplication implements WebMvcConfigurer {
         ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();
         messageSource.setDefaultEncoding("UTF-8");
         messageSource.setBasename("messages");
-//        messageSource.setBasename("validation");
         return messageSource;
     }
 
@@ -57,6 +53,5 @@ public class ChamberAnalysisApplication implements WebMvcConfigurer {
         validator.setValidationMessageSource(messageSource());
         return validator;
     }
-
 
 }

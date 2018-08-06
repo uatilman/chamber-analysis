@@ -19,7 +19,6 @@ import ru.tilman.chamberanalysis.repository.UserRepository;
 
 import javax.validation.Valid;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 
@@ -52,20 +51,18 @@ public class UserController {
         return "registration";
     }
 
-//    @RequestMapping(value = "admin/users", method = RequestMethod.GET)
-//    public String showUsers(Model uiModel, User user) {
-//
-//        uiModel.addAttribute(USERS_ATTRIBUTE, userRepository.findAll());
-//        return "users";
-//    }
+    @RequestMapping(value = "admin/users", method = RequestMethod.GET)
+    public String showUsers(Model uiModel, User user) {
 
-    //принимает данные формы
+        uiModel.addAttribute(USERS_ATTRIBUTE, userRepository.findAll());
+        return "users";
+    }
+
     @RequestMapping(value = "/registration", method = RequestMethod.POST)
     public String registration(
             Model uiModel,
             @ModelAttribute("user") @Valid User user,
             BindingResult bindingResult,
-            RedirectAttributes redAttributes,
             Locale locale) {
 
         if (bindingResult.hasErrors()) {

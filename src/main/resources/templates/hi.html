@@ -25,6 +25,7 @@
                 <td>ADDRESS</td>
             </tr>
             </thead>
+
             <tbody>
             <tr th:each="item : ${chambers}">
                 <td class="order-product-id" th:text="${item.id}" th:col="ID"></td>
@@ -35,7 +36,6 @@
         </table>
 
     </div>
-
 
 </div>
 <div th:replace="fragments :: footer"></div>

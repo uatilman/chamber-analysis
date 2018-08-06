@@ -10,7 +10,6 @@
 
 <header th:fragment="header" class="padding-site">
 
-
     <div class="header">
         <script language="JavaScript" type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.js"></script>
         <script>
@@ -18,7 +17,6 @@
                 function () {
 
                     var currentLang = '[[${#locale}]]';
-                    // alert(currentLang);
                     var data = (currentLang === "ru_RU") ? "en_GB" : "ru_RU";
                     var langImgSrc = 'img/' + currentLang + ".png";
                     $(document).find(".lang-icon").attr("src", langImgSrc);
@@ -49,7 +47,9 @@
                 <li><a href="/rest/getChambers" th:text="#{menu.rest}">restData</a></li>
                 <li sec:authorize="isAnonymous()"><a href="/login" th:text="#{menu.login}">login</a></li>
                 <li sec:authorize="isAuthenticated()">
-                    <a href="#" th:text="${#authentication.name + '(' + #authentication.principal.authorities[0] + ')'}">User page</a>
+                    <a href="#"
+                       th:text="${#authentication.name + '(' + #authentication.principal.authorities[0] + ')'}">User
+                        page</a>
                 </li>
                 <li sec:authorize="isAuthenticated()"><a href="/logout" th:text="#{menu.logout}">logout</a></li>
                 <li><img class="lang-icon" alt="lang" src=""></li>

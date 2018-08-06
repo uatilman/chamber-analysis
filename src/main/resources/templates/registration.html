@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <title></title>
+    <title th:text="#{registration.page.title}"></title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <link rel="stylesheet" th:href="@{/css/style.css}"/>
 
@@ -37,7 +37,7 @@
                             <input type="text" th:placeholder="#{label.login}" th:field="*{login}"/>
                         </td>
                         <td class="error-registration-column">
-                            <span th:if="${#fields.hasErrors('login')}" class="error" th:errors="*{login}"/>
+                            <span th:if="${#fields.hasErrors('login')}" class="error" th:errors="*{login}"></span>
                         </td>
                     </tr>
 
@@ -45,7 +45,7 @@
                         <td class="data-registration-column">
                             <input type="text" th:placeholder="#{label.first_name}" th:field="*{firstname}"/></td>
                         <td class="error-registration-column">
-                            <span th:if="${#fields.hasErrors('firstname')}" class="error" th:errors="*{firstname}"/>
+                            <span th:if="${#fields.hasErrors('firstname')}" class="error" th:errors="*{firstname}"></span>
                         </td>
                     </tr>
 
@@ -54,7 +54,7 @@
                             <input type="text" th:placeholder="#{label.last_name}" th:field="*{lastname}"/>
                         </td>
                         <td class="error-registration-column">
-                            <span th:if="${#fields.hasErrors('lastname')}" class="error" th:errors="*{lastname}"/>
+                            <span th:if="${#fields.hasErrors('lastname')}" class="error" th:errors="*{lastname}"></span>
                         </td>
                     </tr>
 
@@ -63,12 +63,14 @@
                             <input type="password" th:placeholder="#{label.password}" th:field="*{password}"/>
                         </td>
                         <td class="error-registration-column">
-                            <span th:if="${#fields.hasErrors('password')}" class="error" th:errors="*{password}"/>
+                            <span th:if="${#fields.hasErrors('password')}" class="error" th:errors="*{password}"></span>
                         </td>
                     </tr>
 
                     <tr>
-                        <td colspan="2"><input class="login-button" type="submit" name="commit" th:value="#{button.send}"/></td>
+                        <td colspan="2">
+                            <input class="login-button" type="submit" name="commit" th:value="#{button.send}"/>
+                        </td>
                     </tr>
 
                 </table>

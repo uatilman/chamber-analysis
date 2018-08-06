@@ -20,19 +20,21 @@
 
             <thead>
             <tr>
-                <th th:text="#{table_chamber_id}"></th>
-                <th th:text="#{table_chamber_name}"></th>
-                <th th:text="#{table_chamber_address}"></th>
+                <th th:text="#{table.chamber.id}"></th>
+                <th th:text="#{table.chamber.name}"></th>
+                <th th:text="#{table.chamber.address}"></th>
             </tr>
             </thead>
 
             <tbody>
-            <tr class="click-row" th:each="item : ${chambers}" th:attr="onclick='document.location = &quot;/chambers?id=' + ${item.id} + '&quot;;'">
+            <tr class="click-row" th:each="item : ${chambers}"
+                th:attr="onclick='document.location = &quot;/chambers?id=' + ${item.id} + '&quot;;'">
                 <td class="id-column" th:text="${item.id}" th:col="ID"></td>
                 <td class="name-column" th:text="${item.name}"></td>
                 <td class="address-column" th:text="${item.address}"></td>
             </tr>
             </tbody>
+
         </table>
 
         <div th:replace="fragments :: footer"></div>

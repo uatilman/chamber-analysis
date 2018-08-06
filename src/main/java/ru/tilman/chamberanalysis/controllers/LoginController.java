@@ -39,7 +39,6 @@ public class LoginController {
         return "redirect:/chambers";
     }
 
-
     @RequestMapping(value = "loginfailed")
     public String loginFailed(RedirectAttributes redirectAttributes, Locale locale) {
         redirectAttributes.addFlashAttribute(
@@ -47,6 +46,5 @@ public class LoginController {
                 messageSource.getMessage("login_failed", new Object[]{}, locale));
         return "redirect:/login";
     }
-
 
 }
