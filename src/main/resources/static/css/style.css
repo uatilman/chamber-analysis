@@ -78,7 +78,7 @@ h3 {
     margin-top: 57px;
 }
 
-.menu a {
+.menu a, .menu span {
     padding: 10px 13px;
     color: #8c8c8c;
     font-size: 14px;
@@ -1009,6 +1009,14 @@ button .svg-inline--fa.fa-w-14:hover {
     border-width: 1px;
 }
 
+.registration-table {
+    width: 666px;
+}
+
+.registration-table tbody tr {
+    height: 50px;
+}
+
 .chamber-table tbody tr:nth-last-of-type(2n) {
     background-color: #c7c7c7;
 }
@@ -1026,8 +1034,21 @@ button .svg-inline--fa.fa-w-14:hover {
     width: 300px;
 }
 
+.registration-table .data-registration-column {
+    width: 266px;
+}
+
+.registration-table .error-registration-column {
+    width: 300px;
+    vertical-align: center;
+}
+
+.error-row {
+    text-align: center;
+}
+
 .chamber-table .region-name-column {
-    width: 200px;
+    width: 300px;
 }
 
 .chamber-table .district-name-column {

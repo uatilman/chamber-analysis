@@ -52,10 +52,10 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
 
                 .antMatchers(HttpMethod.GET, "/hi", "/chambers/add/**")
-                .hasAuthority("admin")
+                .hasAuthority("admins")
 
                 .antMatchers(HttpMethod.GET, "/chambers/todo")
-                .hasAnyAuthority("admin", "user")
+                .hasAnyAuthority("admins", "user")
 
                 .and()
                 .formLogin()

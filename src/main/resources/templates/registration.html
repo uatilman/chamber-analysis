@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Spring Boot and Thymeleaf example</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
+
+</head>
+
+<body>
+
+<div class="container">
+    <div th:replace="fragments :: header"></div>
+
+    <div class="padding-site">
+
+        <div class="login">
+
+            <form action="#" th:action="@{/registration}" th:object="${user}" method="post">
+
+                <table class="registration-table">
+
+                    <tr>
+                        <td colspan="2"><h2>Регистрация</h2></td>
+                    </tr>
+
+                    <tr class="error-registration-column">
+                        <td colspan="2" class="error-row">
+                            <span class="error" th:text="${errMessage}"></span>
+                            <span class="error" th:text="${message}"></span>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="data-registration-column">
+                            <input type="text" placeholder="login" th:field="*{login}"/>
+                        </td>
+                        <td class="error-registration-column">
+                            <span th:if="${#fields.hasErrors('login')}" class="error" th:errors="*{login}"/>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="data-registration-column">
+                            <input type="text" placeholder="firstname" th:field="*{firstname}"/></td>
+                        <td class="error-registration-column">
+                            <span th:if="${#fields.hasErrors('firstname')}" class="error" th:errors="*{firstname}"/>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="data-registration-column">
+                            <input type="text" placeholder="lastname" th:field="*{lastname}"/>
+                        </td>
+                        <td class="error-registration-column">
+                            <span th:if="${#fields.hasErrors('lastname')}" class="error" th:errors="*{lastname}"/>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="data-registration-column">
+                            <input type="password" placeholder="password" th:field="*{password}"/>
+                        </td>
+                        <td class="error-registration-column">
+                            <span th:if="${#fields.hasErrors('password')}" class="error" th:errors="*{password}"/>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td colspan="2"><input class="login-button" type="submit" name="commit" value="Отправить"/></td>
+                    </tr>
+
+                </table>
+            </form>
+        </div>
+
+    </div>
+</div>
+
+<div th:replace="fragments :: footer"></div>
+
+</body>
+</html>
