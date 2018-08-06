@@ -2,12 +2,11 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <title>Spring Boot and Thymeleaf example</title>
+    <title th:text="#{chambers.page.title}"></title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <link rel="stylesheet" href="css/style.css"/>
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
     <script language="JavaScript" type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.js"></script>
-    <script language="JavaScript" type="text/javascript" src="/getChambers.js"></script>
-
+    <script language="JavaScript" type="text/javascript" th:src="@{/getChambers.js}"></script>
 </head>
 
 <body>

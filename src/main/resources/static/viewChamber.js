@@ -2,6 +2,7 @@ function renderingChamber(chamber) {
     $('#id-row').html(chamber["id"]);
     $('#name-row').html(chamber["name"]);
     $('#address-row').html(chamber["address"]);
+    $('title').html(chamber["name"]);
 }
 
 function loadChamber() {
