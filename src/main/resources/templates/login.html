@@ -2,9 +2,9 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <title>Spring Boot and Thymeleaf example</title>
+    <title th:text="#{login.page.title}"></title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <link rel="stylesheet" href="css/style.css"/>
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
 </head>
 
 <body>
@@ -14,11 +14,13 @@
     <div class="padding-site">
 
         <div class="login">
-            <h2>Авторизация</h2>
+            <h2 th:text="#{login.page.title}"></h2>
             <form th:action="@{/login}" method="post">
-                <div><input type="text" value="admin" name="login" placeholder="Логин"/></div>
-                <div><input type="password" value="admin@123" name="password" placeholder="Пароль"/></div>
-                <div><input class="login-button" type="submit" name="commit" value="Войти"/></div>
+                <div><input type="text" value="admin" name="login" th:placeholder="#{label.login}"/></div>
+                <div><input type="password" value="admin@123" name="password" th:placeholder="#{label.password}"/></div>
+                <div><input class="login-button" type="submit" name="commit" th:value="#{button.login}"/></div>
+
+                <div><a class="link-button" href="registration" th:text="#{button.registration}">Registration</a></div>
 
             </form>
         </div>

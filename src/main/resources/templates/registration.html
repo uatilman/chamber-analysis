@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <title>Spring Boot and Thymeleaf example</title>
+    <title th:text="#{registration.page.title}"></title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <link rel="stylesheet" th:href="@{/css/style.css}"/>
 
@@ -22,10 +22,10 @@
                 <table class="registration-table">
 
                     <tr>
-                        <td colspan="2"><h2>Регистрация</h2></td>
+                        <td colspan="2"><h2 th:text="#{registration.page.title}"></h2></td>
                     </tr>
 
-                    <tr class="error-registration-column">
+                    <tr th:if="${#fields.hasErrors()}" class="error-registration-column">
                         <td colspan="2" class="error-row">
                             <span class="error" th:text="${errMessage}"></span>
                             <span class="error" th:text="${message}"></span>
@@ -34,7 +34,7 @@
 
                     <tr>
                         <td class="data-registration-column">
-                            <input type="text" placeholder="login" th:field="*{login}"/>
+                            <input type="text" th:placeholder="#{label.login}" th:field="*{login}"/>
                         </td>
                         <td class="error-registration-column">
                             <span th:if="${#fields.hasErrors('login')}" class="error" th:errors="*{login}"/>
@@ -43,7 +43,7 @@
 
                     <tr>
                         <td class="data-registration-column">
-                            <input type="text" placeholder="firstname" th:field="*{firstname}"/></td>
+                            <input type="text" th:placeholder="#{label.first_name}" th:field="*{firstname}"/></td>
                         <td class="error-registration-column">
                             <span th:if="${#fields.hasErrors('firstname')}" class="error" th:errors="*{firstname}"/>
                         </td>
@@ -51,7 +51,7 @@
 
                     <tr>
                         <td class="data-registration-column">
-                            <input type="text" placeholder="lastname" th:field="*{lastname}"/>
+                            <input type="text" th:placeholder="#{label.last_name}" th:field="*{lastname}"/>
                         </td>
                         <td class="error-registration-column">
                             <span th:if="${#fields.hasErrors('lastname')}" class="error" th:errors="*{lastname}"/>
@@ -60,7 +60,7 @@
 
                     <tr>
                         <td class="data-registration-column">
-                            <input type="password" placeholder="password" th:field="*{password}"/>
+                            <input type="password" th:placeholder="#{label.password}" th:field="*{password}"/>
                         </td>
                         <td class="error-registration-column">
                             <span th:if="${#fields.hasErrors('password')}" class="error" th:errors="*{password}"/>
@@ -68,7 +68,7 @@
                     </tr>
 
                     <tr>
-                        <td colspan="2"><input class="login-button" type="submit" name="commit" value="Отправить"/></td>
+                        <td colspan="2"><input class="login-button" type="submit" name="commit" th:value="#{button.send}"/></td>
                     </tr>
 
                 </table>

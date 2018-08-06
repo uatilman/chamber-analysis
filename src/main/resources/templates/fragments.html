@@ -2,9 +2,9 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
-    <title>Spring Boot and Thymeleaf example</title>
+    <title>fragments</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <link rel="stylesheet" href="css/style.css"/>
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
 </head>
 <body>
 
@@ -43,16 +43,15 @@
 
         <nav>
             <ul class="menu">
-                <li><a href="/">home</a></li>
-                <li><a href="/hi">test</a></li>
-                <li><a href="/chambers">js-table</a></li>
-                <li><a href="/rest/getChambers">restData</a></li>
-                <li sec:authorize="isAnonymous()"><a href="/login">login</a></li>
+                <li><a href="/" th:text="#{menu.home}">home</a></li>
+                <li><a href="/hi" th:text="#{menu.test}">test</a></li>
+                <li><a href="/chambers" th:text="#{menu.js}">js-table</a></li>
+                <li><a href="/rest/getChambers" th:text="#{menu.rest}">restData</a></li>
+                <li sec:authorize="isAnonymous()"><a href="/login" th:text="#{menu.login}">login</a></li>
                 <li sec:authorize="isAuthenticated()">
-
-                    <a href="#" th:text="${#authentication.name + '(' + #authentication.principal.authorities[0] + ')'}">logout</a>
+                    <a href="#" th:text="${#authentication.name + '(' + #authentication.principal.authorities[0] + ')'}">User page</a>
                 </li>
-                <li sec:authorize="isAuthenticated()"><a href="/logout">logout</a></li>
+                <li sec:authorize="isAuthenticated()"><a href="/logout" th:text="#{menu.logout}">logout</a></li>
                 <li><img class="lang-icon" alt="lang" src=""></li>
             </ul>
         </nav>
