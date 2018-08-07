@@ -21,6 +21,7 @@ public class RestChambersController {
 
     private final ChamberRepository chamberRepository;
 
+
     @Autowired
     public RestChambersController(@Qualifier("chamberRepository") ChamberRepository chamberRepository) {
         this.chamberRepository = chamberRepository;
@@ -34,20 +35,18 @@ public class RestChambersController {
             @RequestParam(value = "orderBy", defaultValue = "id") String orderBy,
             @RequestParam(value = "id", defaultValue = "-1") Integer id
     ) {
-        if (id != -1) {
-            return Collections.singletonList(chamberRepository.findById(Long.valueOf(id)).get());
-        }
 
+        if (id != -1) return Collections.singletonList(chamberRepository.findById(Long.valueOf(id)).get());
         if (size == -1) size = Math.toIntExact(chamberRepository.count());
 
         Sort sort = null;
-
+        // TODO: 07.08.18 "DESC" в контанту
+        // TODO: 07.08.18 удалить  лишние пробелы
         if (order.equalsIgnoreCase("DESC")) sort = new Sort(Sort.Direction.DESC, orderBy);
         else sort = new Sort(Sort.Direction.ASC, orderBy);
 
         PageRequest pageable = PageRequest.of(pageNumber, size, sort);
         Page<Chamber> chamberPage = chamberRepository.findAll(pageable);
-
 
         return Lists.newArrayList(chamberPage.iterator());
     }

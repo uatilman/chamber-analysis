@@ -16,11 +16,11 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
     private static String USER_QUERY =
             "SELECT login, password, enabled " +
-                    "FROM chambers.user " +
+                    "FROM u496555267_cham.user " +
                     "WHERE login = ?";
     private static String USER_ROLE_QUERY =
             "SELECT user.login, role.name " +
-                    "FROM chambers.user JOIN (role, user_role) " +
+                    "FROM u496555267_cham.user JOIN (role, user_role) " +
                     "ON (user.id = user_role.user_id and role.id = user_role.role_id) " +
                     "WHERE user.login = ?;";
 

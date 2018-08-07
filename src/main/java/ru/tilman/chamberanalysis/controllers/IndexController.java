@@ -50,7 +50,7 @@ public class IndexController {
 
     @RequestMapping("/chambers")
     public String chambers(
-            @RequestParam(value = "id", defaultValue = "-1") Long id
+            @RequestParam(value = "id", defaultValue = "-1") Long id // TODO: 07.08.18 test def value null
     ) {
         if (id != -1) return "view";
         return "chambers";

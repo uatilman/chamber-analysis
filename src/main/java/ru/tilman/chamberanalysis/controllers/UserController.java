@@ -4,57 +4,54 @@ package ru.tilman.chamberanalysis.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.MessageSource;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import ru.tilman.chamberanalysis.entity.security.Role;
 import ru.tilman.chamberanalysis.entity.security.User;
-import ru.tilman.chamberanalysis.repository.RoleRepository;
-import ru.tilman.chamberanalysis.repository.UserRepository;
+import ru.tilman.chamberanalysis.services.RegistrationService;
 
 import javax.validation.Valid;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Locale;
+
+import static ru.tilman.chamberanalysis.utils.MessagesAttributes.*;
+import static ru.tilman.chamberanalysis.utils.MessagesCodes.CREATE_FAIL;
+import static ru.tilman.chamberanalysis.utils.MessagesCodes.LOGIN_EXIST;
 
 @Controller
 public class UserController {
 
-    private final String MESSAGE_ATTRIBUTE = "message";
-    private final String ERROR_MESSAGE_ATTRIBUTE = "errMessage";
-    private final String USER_ATTRIBUTE = "user";
-    private final String USERS_ATTRIBUTE = "users";
+//    private final UserRepository userRepository;
+//    private final RoleRepository roleRepository;
 
-    private final UserRepository userRepository;
-    private final RoleRepository roleRepository;
+    private RegistrationService registrationService;
     private final MessageSource messageSource;
 
     @Autowired
     public UserController(
-            @Qualifier("userRepository") UserRepository userRepository,
-            @Qualifier("roleRepository") RoleRepository roleRepository,
-            MessageSource messageSource) {
-        this.userRepository = userRepository;
+            @Qualifier("registrationService") RegistrationService registrationService,
+//            @Qualifier("userRepository") UserRepository userRepository,
+//            @Qualifier("roleRepository") RoleRepository roleRepository,
+            MessageSource messageSource
+    ) {
+//        this.userRepository = userRepository;
         this.messageSource = messageSource;
-        this.roleRepository = roleRepository;
+        this.registrationService = registrationService;
+//        this.roleRepository = roleRepository;
     }
 
     @RequestMapping(value = "registration", method = RequestMethod.GET)
     public String registrationForm(Model uiModel) {
         User user = new User();
-        uiModel.addAttribute(USER_ATTRIBUTE, user);
+        uiModel.addAttribute(USER, user);
         return "registration";
     }
 
     @RequestMapping(value = "admin/users", method = RequestMethod.GET)
     public String showUsers(Model uiModel, User user) {
-
-        uiModel.addAttribute(USERS_ATTRIBUTE, userRepository.findAll());
+        uiModel.addAttribute(USERS, registrationService.findAllUsers());
         return "users";
     }
 
@@ -63,33 +60,32 @@ public class UserController {
             Model uiModel,
             @ModelAttribute("user") @Valid User user,
             BindingResult bindingResult,
-            Locale locale) {
+            Locale locale
+    ) {
+        if (checkErrors(uiModel, bindingResult, locale)) return "registration";
+        if (checkLogin(uiModel, user, locale)) return "registration";
+        registrationService.createUser(user);
+        return "redirect:/";
+    }
 
+    private boolean checkErrors(Model uiModel, BindingResult bindingResult, Locale locale) {
         if (bindingResult.hasErrors()) {
             uiModel.addAttribute(
-                    ERROR_MESSAGE_ATTRIBUTE,
-                    messageSource.getMessage("user_create_fail", new Object[]{}, locale));
-            return "registration";
+                    ERROR_MESSAGE,
+                    messageSource.getMessage(CREATE_FAIL, new Object[]{}, locale));
+            return true;
         }
+        return false;
+    }
 
-        if (userRepository.findByLogin(user.getLogin()) != null) {
-
+    private boolean checkLogin(Model uiModel, @Valid @ModelAttribute("user") User user, Locale locale) {
+        if (registrationService.isLoginExist(user.getLogin())) {
             uiModel.addAttribute(
-                    MESSAGE_ATTRIBUTE,
-                    messageSource.getMessage("user_login_exist", new Object[]{}, locale));
-            return "registration";
-
+                    MESSAGE,
+                    messageSource.getMessage(LOGIN_EXIST, new Object[]{}, locale));
+            return true;
         }
-
-        user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
-        user.setEnabled(true);
-        Role role = roleRepository.findByName("user");
-        List<Role> roleList = new ArrayList<>();
-        roleList.add(role);
-        user.setRoleList(roleList);
-        userRepository.save(user);
-
-        return "redirect:/";
+        return false;
     }
 
 }
