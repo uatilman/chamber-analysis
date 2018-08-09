@@ -8,28 +8,21 @@
 </head>
 
 <body>
-
 <div class="container">
     <div th:replace="fragments :: header"></div>
     <div class="padding-site">
-
         <div class="login">
             <h2 th:text="#{login.page.title}"></h2>
             <form th:action="@{/login}" method="post">
-
                 <div><input type="text" value="admin" name="login" th:placeholder="#{label.login}"></div>
                 <div><input type="password" value="admin@123" name="password" th:placeholder="#{label.password}"></div>
                 <div><input class="login-button" type="submit" name="commit" th:value="#{button.login}"/></div>
-
                 <div><a class="link-button" href="registration" th:text="#{button.registration}">Registration</a></div>
-
             </form>
         </div>
 
     </div>
 </div>
 <div th:replace="fragments :: footer"></div>
-
-
 </body>
 </html>

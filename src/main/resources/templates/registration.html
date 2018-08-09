@@ -9,16 +9,12 @@
 </head>
 
 <body>
-
 <div class="container">
     <div th:replace="fragments :: header"></div>
-
     <div class="padding-site">
-
         <div class="login">
 
             <form action="#" th:action="@{/registration}" th:object="${user}" method="post">
-
                 <table class="registration-table">
 
                     <tr>
@@ -45,7 +41,8 @@
                         <td class="data-registration-column">
                             <input type="text" th:placeholder="#{label.first_name}" th:field="*{firstname}"/></td>
                         <td class="error-registration-column">
-                            <span th:if="${#fields.hasErrors('firstname')}" class="error" th:errors="*{firstname}"></span>
+                            <span th:if="${#fields.hasErrors('firstname')}" class="error"
+                                  th:errors="*{firstname}"></span>
                         </td>
                     </tr>
 
@@ -75,12 +72,10 @@
 
                 </table>
             </form>
-        </div>
 
+        </div>
     </div>
 </div>
-
 <div th:replace="fragments :: footer"></div>
-
 </body>
 </html>

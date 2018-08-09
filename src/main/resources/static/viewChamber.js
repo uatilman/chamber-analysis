@@ -24,7 +24,6 @@ function loadChamber() {
     });
 }
 
-
 $(document).ready(
     function () {
         loadChamber();

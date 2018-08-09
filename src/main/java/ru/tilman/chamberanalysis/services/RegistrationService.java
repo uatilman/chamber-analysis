@@ -2,7 +2,6 @@ package ru.tilman.chamberanalysis.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.context.MessageSource;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import ru.tilman.chamberanalysis.entity.security.Role;
@@ -22,8 +21,7 @@ public class RegistrationService {
     @Autowired
     public RegistrationService(
             @Qualifier("userRepository") UserRepository userRepository,
-            @Qualifier("roleRepository") RoleRepository roleRepository,
-            MessageSource messageSource
+            @Qualifier("roleRepository") RoleRepository roleRepository
     ) {
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;

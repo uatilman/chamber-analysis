@@ -14,10 +14,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Locale;
 
+import static ru.tilman.chamberanalysis.utils.MessagesAndModelsAttributes.LOGIN_FAILED;
+import static ru.tilman.chamberanalysis.utils.MessagesAndModelsAttributes.MESSAGE;
+
 @Controller
 public class LoginController {
 
-    private final String MESSAGE_ATTRIBUTE = "message";
     private final MessageSource messageSource;
 
     @Autowired
@@ -40,8 +42,8 @@ public class LoginController {
     @RequestMapping(value = "loginfailed")
     public String loginFailed(RedirectAttributes redirectAttributes, Locale locale) {
         redirectAttributes.addFlashAttribute(
-                MESSAGE_ATTRIBUTE,
-                messageSource.getMessage("login_failed", new Object[]{}, locale));
+                MESSAGE,
+                messageSource.getMessage(LOGIN_FAILED, new Object[]{}, locale));
         return "redirect:/login";
     }
 
