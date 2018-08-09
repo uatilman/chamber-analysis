@@ -9,9 +9,11 @@
 
 <body>
 <div class="container">
+
     <div th:replace="fragments :: header"></div>
+
     <div class="padding-site product-table">
-        <p>test commit for the Deploy via Github</p>
+
         <h3 th:text="${chambersCount}"></h3>
 
         <table border="1" class="chamber-table">
@@ -34,7 +36,9 @@
             </tbody>
 
         </table>
+
         <div th:replace="fragments :: footer"></div>
+
     </div>
 </div>
 

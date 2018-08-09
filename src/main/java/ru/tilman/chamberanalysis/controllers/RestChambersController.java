@@ -19,10 +19,6 @@ import java.util.List;
 @RequestMapping("rest")
 public class RestChambersController {
 
-    public static final String DESC = "DESC";
-    public static final String ASC = "ASC";
-    public static final String ID = "id";
-
     private final ChamberRepository chamberRepository;
 
     @Autowired
@@ -30,23 +26,28 @@ public class RestChambersController {
         this.chamberRepository = chamberRepository;
     }
 
-    @RequestMapping("/getChambers") // TODO: 09.08.18 add required = false instead defaultValue
+    @RequestMapping("/getChambers")
     public List<Chamber> getChambersList(
             @RequestParam(value = "pageNumber", defaultValue = "0") Integer pageNumber,
-            @RequestParam(value = "size", required = false) Integer size,
-            @RequestParam(value = "order", defaultValue = ASC) String order,
-            @RequestParam(value = "orderBy", defaultValue = ID) String orderBy,
-            @RequestParam(value = "id", required = false) Integer id
+            @RequestParam(value = "size", defaultValue = "-1") Integer size,
+            @RequestParam(value = "order", defaultValue = "ASC") String order,
+            @RequestParam(value = "orderBy", defaultValue = "id") String orderBy,
+            @RequestParam(value = "id", defaultValue = "-1") Integer id
     ) {
+        if (id != -1) {
+            return Collections.singletonList(chamberRepository.findById(Long.valueOf(id)).get());
+        }
 
-        if (id != null) return Collections.singletonList(chamberRepository.findById(Long.valueOf(id)).get());
-        if (size == null) size = Math.toIntExact(chamberRepository.count());
+        if (size == -1) size = Math.toIntExact(chamberRepository.count());
 
         Sort sort = null;
-        if (order.equalsIgnoreCase(DESC)) sort = new Sort(Sort.Direction.DESC, orderBy);
+
+        if (order.equalsIgnoreCase("DESC")) sort = new Sort(Sort.Direction.DESC, orderBy);
         else sort = new Sort(Sort.Direction.ASC, orderBy);
+
         PageRequest pageable = PageRequest.of(pageNumber, size, sort);
         Page<Chamber> chamberPage = chamberRepository.findAll(pageable);
+
 
         return Lists.newArrayList(chamberPage.iterator());
     }

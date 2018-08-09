@@ -14,12 +14,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Locale;
 
-import static ru.tilman.chamberanalysis.utils.MessagesAndModelsAttributes.LOGIN_FAILED;
-import static ru.tilman.chamberanalysis.utils.MessagesAndModelsAttributes.MESSAGE;
-
 @Controller
 public class LoginController {
 
+    private final String MESSAGE_ATTRIBUTE = "message";
     private final MessageSource messageSource;
 
     @Autowired
@@ -35,15 +33,17 @@ public class LoginController {
     @RequestMapping(value = "logout", method = RequestMethod.GET)
     public String logoutPage(HttpServletRequest request, HttpServletResponse response) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        if (auth != null) new SecurityContextLogoutHandler().logout(request, response, auth);
+        if (auth != null) {
+            new SecurityContextLogoutHandler().logout(request, response, auth);
+        }
         return "redirect:/chambers";
     }
 
     @RequestMapping(value = "loginfailed")
     public String loginFailed(RedirectAttributes redirectAttributes, Locale locale) {
         redirectAttributes.addFlashAttribute(
-                MESSAGE,
-                messageSource.getMessage(LOGIN_FAILED, new Object[]{}, locale));
+                MESSAGE_ATTRIBUTE,
+                messageSource.getMessage("login_failed", new Object[]{}, locale));
         return "redirect:/login";
     }
 

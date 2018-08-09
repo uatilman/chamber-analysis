@@ -14,6 +14,16 @@ import javax.sql.DataSource;
 @Configuration
 public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
+    private static String USER_QUERY =
+            "SELECT login, password, enabled " +
+                    "FROM chambers.user " +
+                    "WHERE login = ?";
+    private static String USER_ROLE_QUERY =
+            "SELECT user.login, role.name " +
+                    "FROM chambers.user JOIN (role, user_role) " +
+                    "ON (user.id = user_role.user_id and role.id = user_role.role_id) " +
+                    "WHERE user.login = ?;";
+
     private final DataSource dataSource;
 
     @Autowired
@@ -23,13 +33,6 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private void configAuthentication(AuthenticationManagerBuilder auth) throws Exception {
-        String USER_QUERY = "SELECT login, password, enabled FROM rry5tbl0rdvdvjoc.user WHERE login = ?";
-        String USER_ROLE_QUERY = "SELECT user.login, role.name FROM rry5tbl0rdvdvjoc.user " +
-                "JOIN (rry5tbl0rdvdvjoc.role, rry5tbl0rdvdvjoc.user_role) " +
-                "ON (user.id = user_role.user_id and role.id = user_role.role_id) WHERE user.login = ?;";
-//        String USER_QUERY = "SELECT login, password, enabled FROM chambers.user WHERE login = ?";
-//        String USER_ROLE_QUERY = "SELECT user.login, role.name FROM chambers.user   JOIN (role, user_role) " +
-//                "ON (user.id = user_role.user_id and role.id = user_role.role_id)   WHERE user.login = ?";
         auth
                 .jdbcAuthentication()
                 .dataSource(dataSource)
@@ -46,14 +49,11 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-                .requiresChannel()
-                .requestMatchers(r -> r.getHeader("X-Forwarded-Proto") != null)
-                .requiresSecure()
-
-                .and()
                 .authorizeRequests()
+
                 .antMatchers(HttpMethod.GET, "/hi", "/rest/remove")
                 .hasAuthority("admins")
+
                 .antMatchers(HttpMethod.GET, "/chamber")
                 .hasAnyAuthority("admins", "user")
 
@@ -61,6 +61,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .formLogin()
                 .loginPage("/login")
                 .loginProcessingUrl("/login")
+
                 .usernameParameter("login")
                 .passwordParameter("password")
                 .failureUrl("/loginfailed")

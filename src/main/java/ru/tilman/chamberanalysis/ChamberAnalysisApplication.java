@@ -3,7 +3,6 @@ package ru.tilman.chamberanalysis;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.validation.Validator;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
@@ -14,7 +13,6 @@ import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 
 
 @SpringBootApplication
-@EnableAspectJAutoProxy
 public class ChamberAnalysisApplication implements WebMvcConfigurer {
 
     public static void main(String[] args) {
@@ -26,7 +24,6 @@ public class ChamberAnalysisApplication implements WebMvcConfigurer {
         ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();
         messageSource.setDefaultEncoding("UTF-8");
         messageSource.setBasename("messages");
-//        messageSource.setBasename("constant");
         return messageSource;
     }
 
