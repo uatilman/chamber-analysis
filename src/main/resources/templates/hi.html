@@ -11,11 +11,11 @@
     <div th:replace="fragments :: header"></div>
 
     <div class="padding-site product-table">
-        <h3>Products</h3>
-        <p>Интернацианализирвоанные сообщения</p>
-        <p>Из атрибута установленного в контроллере</p><span th:text="${testModel}"></span>
-        <br>
-        <p>Напрямую из html страницы</p><span th:text="#{welcome.message}"></span>
+        <h3>Home task 3</h3>
+        <p>Интернационализированные сообщения</p>
+        <p>Получение сообщения из атрибута установленного в контроллере <span th:text="${testModel}"></span></p>
+        <p>Получение сообщения из файла сообщений, вызвано напрямую из html страницы <span
+                th:text="#{welcome.message}"></span></p>
 
         <table border="1">
             <thead>
@@ -38,8 +38,8 @@
     </div>
 
 </div>
-<div th:replace="fragments :: footer"></div>
 
+<div th:replace="fragments :: footer"></div>
 
 </body>
 </html>
