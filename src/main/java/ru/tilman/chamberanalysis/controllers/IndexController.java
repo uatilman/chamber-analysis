@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import ru.tilman.chamberanalysis.entity.Chamber;
 import ru.tilman.chamberanalysis.repository.ChamberRepository;
+import ru.tilman.chamberanalysis.services.ChamberService;
 
 import java.util.List;
 import java.util.Locale;
@@ -19,21 +20,21 @@ import static ru.tilman.chamberanalysis.utils.MessagesAndModelsAttributes.*;
 @Controller
 public class IndexController {
 
-    private final ChamberRepository chamberRepository;
     private final MessageSource messageSource;
+    private final ChamberService chamberService;
 
     @Autowired
     public IndexController(
-            @Qualifier("chamberRepository") ChamberRepository chamberRepository,
+            @Qualifier("chamberService") ChamberService chamberService,
             MessageSource messageSource
     ) {
-        this.chamberRepository = chamberRepository;
+        this.chamberService = chamberService;
         this.messageSource = messageSource;
     }
 
     @RequestMapping("/")
     public String welcome(Model model, Locale locale) {
-        List<Chamber> chamberList = chamberRepository.findAllByOrderByIdAsc();
+        List<Chamber> chamberList = chamberService.getChambersListByOrderByIdAsc();
         model.addAttribute(TEST_MODEL, messageSource.getMessage(WELCOME_MESSAGE, new Object[]{}, locale));
         model.addAttribute(CHAMBERS, chamberList);
         model.addAttribute(CHAMBERS_COUNT_ATTRIBUTE,
@@ -43,7 +44,7 @@ public class IndexController {
 
     @RequestMapping("/hi")
     public String test(Model model) {
-        model.addAttribute(CHAMBERS, chamberRepository.findAllByOrderByIdAsc());
+        model.addAttribute(CHAMBERS, chamberService.getChambersListByOrderByIdAsc());
         return "hi";
     }
 
