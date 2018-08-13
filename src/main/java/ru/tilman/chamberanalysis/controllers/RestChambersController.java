@@ -10,9 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import ru.tilman.chamberanalysis.entity.Chamber;
-import ru.tilman.chamberanalysis.repository.ChamberRepository;
+import ru.tilman.chamberanalysis.services.ChamberService;
 
-import java.util.Collections;
 import java.util.List;
 
 @RestController
@@ -23,11 +22,11 @@ public class RestChambersController {
     public static final String ASC = "ASC";
     public static final String ID = "id";
 
-    private final ChamberRepository chamberRepository;
+    private final ChamberService chamberService;
 
     @Autowired
-    public RestChambersController(@Qualifier("chamberRepository") ChamberRepository chamberRepository) {
-        this.chamberRepository = chamberRepository;
+    public RestChambersController(@Qualifier("chamberService") ChamberService chamberService) {
+        this.chamberService = chamberService;
     }
 
     @RequestMapping("/getChambers") // TODO: 09.08.18 add required = false instead defaultValue
@@ -39,14 +38,15 @@ public class RestChambersController {
             @RequestParam(value = "id", required = false) Integer id
     ) {
 
-        if (id != null) return Collections.singletonList(chamberRepository.findById(Long.valueOf(id)).get());
-        if (size == null) size = Math.toIntExact(chamberRepository.count());
+        if (id != null) return chamberService.getChamberListById(id);
+        if (size == null) size = chamberService.getChambersSize();
 
         Sort sort = null;
         if (order.equalsIgnoreCase(DESC)) sort = new Sort(Sort.Direction.DESC, orderBy);
         else sort = new Sort(Sort.Direction.ASC, orderBy);
+
         PageRequest pageable = PageRequest.of(pageNumber, size, sort);
-        Page<Chamber> chamberPage = chamberRepository.findAll(pageable);
+        Page<Chamber> chamberPage = chamberService.getChambersPage(pageable);
 
         return Lists.newArrayList(chamberPage.iterator());
     }
