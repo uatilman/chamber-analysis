@@ -36,7 +36,7 @@
         </xs:complexType>
     </xs:element>
 
-    <xs:complexType name="chamber">
+    <xs:complexType name="chamberRecord">
         <xs:sequence>
             <xs:element name="id" type="xs:long"/>
             <xs:element name="name" type="xs:string"/>
@@ -54,7 +54,7 @@
     <xs:element name="getChambersResponse">
         <xs:complexType>
             <xs:sequence>
-                <xs:element name="rows" type="tns:chamber" maxOccurs="unbounded"/>
+                <xs:element name="rows" type="tns:chamberRecord" maxOccurs="unbounded"/>
             </xs:sequence>
         </xs:complexType>
     </xs:element>

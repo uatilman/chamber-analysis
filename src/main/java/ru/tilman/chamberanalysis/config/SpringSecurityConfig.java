@@ -23,13 +23,13 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private void configAuthentication(AuthenticationManagerBuilder auth) throws Exception {
-        String USER_QUERY = "SELECT login, password, enabled FROM rry5tbl0rdvdvjoc.user WHERE login = ?";
-        String USER_ROLE_QUERY = "SELECT user.login, role.name FROM rry5tbl0rdvdvjoc.user " +
-                "JOIN (rry5tbl0rdvdvjoc.role, rry5tbl0rdvdvjoc.user_role) " +
-                "ON (user.id = user_role.user_id and role.id = user_role.role_id) WHERE user.login = ?;";
-//        String USER_QUERY = "SELECT login, password, enabled FROM chambers.user WHERE login = ?";
-//        String USER_ROLE_QUERY = "SELECT user.login, role.name FROM chambers.user   JOIN (role, user_role) " +
-//                "ON (user.id = user_role.user_id and role.id = user_role.role_id)   WHERE user.login = ?";
+//        String USER_QUERY = "SELECT login, password, enabled FROM rry5tbl0rdvdvjoc.user WHERE login = ?";
+//        String USER_ROLE_QUERY = "SELECT user.login, role.name FROM rry5tbl0rdvdvjoc.user " +
+//                "JOIN (rry5tbl0rdvdvjoc.role, rry5tbl0rdvdvjoc.user_role) " +
+//                "ON (user.id = user_role.user_id and role.id = user_role.role_id) WHERE user.login = ?;";
+        String USER_QUERY = "SELECT login, password, enabled FROM chambers.user WHERE login = ?";
+        String USER_ROLE_QUERY = "SELECT user.login, role.name FROM chambers.user   JOIN (role, user_role) " +
+                "ON (user.id = user_role.user_id and role.id = user_role.role_id)   WHERE user.login = ?";
         auth
                 .jdbcAuthentication()
                 .dataSource(dataSource)

@@ -55,14 +55,23 @@ public class ChamberEndpoint {
     //
     @ResponsePayload
     @PayloadRoot(localPart = "getChambersRequest", namespace = NAMESPACE)
-    public GetChambersResponse getTasks(@RequestPayload final GetChambersRequest request) {
+    public GetChambersResponse getChambers(@RequestPayload final GetChambersRequest request) {
         final GetChambersResponse result = new GetChambersResponse();
 
-        final List<ru.tilman.chamberanalysis.entity.Chamber> chambers = chamberService.getChambersListByOrderByIdAsc();
+        final List<Chamber> chambers = chamberService.getChambersListByOrderByIdAsc();
         for (Chamber chamber : chambers) {
-            result.getRows().add(chamber); // TODO: 13.08.18  add to record method
+            result.getRows().add(recordSoapChamber(chamber));
         }
         return result;
+    }
+
+    @NotNull
+    private ChamberRecord recordSoapChamber(Chamber chamber) {
+        ChamberRecord chamberRecord = new ChamberRecord();
+        chamberRecord.setId(chamber.getId());
+        chamberRecord.setName(chamber.getName());
+        chamberRecord.setAddress(chamber.getAddress());
+        return chamberRecord;
     }
 
 

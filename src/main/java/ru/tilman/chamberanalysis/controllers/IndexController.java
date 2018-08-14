@@ -8,7 +8,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import ru.tilman.chamberanalysis.entity.Chamber;
-import ru.tilman.chamberanalysis.repository.ChamberRepository;
 import ru.tilman.chamberanalysis.services.ChamberService;
 
 import java.util.List;
