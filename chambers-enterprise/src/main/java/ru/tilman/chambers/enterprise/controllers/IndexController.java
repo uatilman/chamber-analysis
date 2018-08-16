@@ -2,6 +2,8 @@ package ru.tilman.chambers.enterprise.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,12 +16,16 @@ import ru.tilman.chambers.enterprise.utils.MessagesAndModelsAttributes;
 import java.util.List;
 import java.util.Locale;
 
-
+@RefreshScope // curl -X POST http://localhost:8761/actuator/refresh -d {} -H "Content-Type: application/json"
 @Controller
 public class IndexController {
 
     private final MessageSource messageSource;
     private final ChamberService chamberService;
+
+
+    @Value("${info.developer.email}")
+    public String test;
 
     @Autowired
     public IndexController(
@@ -42,7 +48,9 @@ public class IndexController {
 
     @RequestMapping("/hi")
     public String test(Model model) {
-        model.addAttribute(MessagesAndModelsAttributes.CHAMBERS, chamberService.getChambersListByOrderByIdAsc());
+        model
+                .addAttribute(MessagesAndModelsAttributes.CHAMBERS, chamberService.getChambersListByOrderByIdAsc())
+                .addAttribute("test", test);
         return "hi";
     }
 
