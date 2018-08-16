@@ -7,6 +7,8 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.Date;
+
 @EnableDiscoveryClient
 @SpringBootApplication
 @EnableFeignClients
@@ -15,11 +17,10 @@ public class MicroServiceApplication {
         SpringApplication.run(MicroServiceApplication.class, args);
     }
 
-    // TODO: 16.08.18 неиспользуется, непроверено
-    @FeignClient("name")
+    @FeignClient("enterprise")
     interface NameService {
-        @RequestMapping("/")
-        public String getName();
+        @RequestMapping("/rest/test")
+        String getName();
     }
 
 }

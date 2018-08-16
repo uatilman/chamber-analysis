@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import ru.tilman.chambers.enterprise.entity.Chamber;
 import ru.tilman.chambers.enterprise.services.ChamberService;
 
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -27,6 +28,11 @@ public class RestChambersController {
     @Autowired
     public RestChambersController(@Qualifier("chamberService") ChamberService chamberService) {
         this.chamberService = chamberService;
+    }
+
+    @RequestMapping("/test")
+    public String test() {
+        return new Date().toString();
     }
 
     @RequestMapping("/getChambers") // TODO: 09.08.18 add required = false instead defaultValue
@@ -50,5 +56,4 @@ public class RestChambersController {
 
         return Lists.newArrayList(chamberPage.iterator());
     }
-
 }
