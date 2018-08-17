@@ -19,7 +19,7 @@ public class MicroServiceApplication {
 
     @FeignClient("enterprise")
     interface NameService {
-        @RequestMapping("/rest/test")
+        @RequestMapping("/rest/getChambers")
         String getName();
     }
 

@@ -12,6 +12,8 @@
         <module>chambers-enterprise</module>
         <module>use-microservice</module>
         <module>chambers-proxy</module>
+        <module>chambers-microservice</module>
+        <module>chambers-utils</module>
 
     </modules>
     <packaging>pom</packaging>

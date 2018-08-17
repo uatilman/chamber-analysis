@@ -5,6 +5,7 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
+import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.context.support.ResourceBundleMessageSource;
@@ -18,6 +19,7 @@ import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 @SpringBootApplication
 @EnableAspectJAutoProxy
 @EnableDiscoveryClient
+@EnableFeignClients
 //@EnableAutoConfiguration
 public class ChamberAnalysisApplication implements WebMvcConfigurer {
 
