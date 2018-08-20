@@ -1,10 +1,13 @@
 package ru.tilman.chambers.enterprise.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import ru.tilman.chambers.enterprise.entity.Chamber;
+import ru.tilman.chambers.enterprise.integration.CashMessageGateway;
+import ru.tilman.chambers.enterprise.integration.CashMessageHTTPGateway;
 import ru.tilman.chambers.enterprise.services.ChamberFeignService;
 
 import java.util.Date;
@@ -18,23 +21,16 @@ public class RestChambersController {
     public static final String ASC = "ASC";
     public static final String ID = "id";
 
-
-//    private final ChamberService chamberService;
     private final ChamberFeignService chamberFeignService;
+    private CashMessageGateway cashMessageGateway;
+    private CashMessageHTTPGateway cashMessageHTTPGateway;
 
     @Autowired(required = false)
-    public RestChambersController(ChamberFeignService chamberFeignService) {
+    public RestChambersController(ChamberFeignService chamberFeignService, CashMessageGateway cashMessageGateway, CashMessageHTTPGateway cashMessageHTTPGateway) {
         this.chamberFeignService = chamberFeignService;
+        this.cashMessageGateway = cashMessageGateway;
+        this.cashMessageHTTPGateway = cashMessageHTTPGateway;
     }
-
-//    @Autowired(required = false)
-//    public RestChambersController(
-//            @Qualifier("chamberService") ChamberService chamberService,
-//            ChamberFeignService chamberFeignService
-//    ) {
-//        this.chamberService = chamberService;
-//        this.chamberFeignService = chamberFeignService;
-//    }
 
     @RequestMapping("/test")
     public String test() {
@@ -49,6 +45,22 @@ public class RestChambersController {
             @RequestParam(value = "orderBy", defaultValue = ID) String orderBy,
             @RequestParam(value = "id", required = false) Integer id
     ) {
-        return chamberFeignService.getChambers();
+
+        List<Chamber> chamberList = chamberFeignService.getChambers();
+        Chamber chamber = chamberList.get(0);
+        cashMessageGateway.send(MessageBuilder
+                .withPayload(chamber)
+                .setHeader("CHAMBER", chamber.getId())
+                .build()
+        );
+
+        // TODO: 20.08.18 дебажить *5
+        cashMessageHTTPGateway.send(MessageBuilder
+                .withPayload(chamber)
+                .setHeader("CHAMBER_HTTP", chamber.getId())
+                .build()
+        );
+
+        return chamberList;
     }
 }
