@@ -1,16 +1,14 @@
 package ru.tilman.chambers.enterprise.controllers;
 
-import com.google.common.collect.Lists;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
+import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import ru.tilman.chambers.enterprise.entity.Chamber;
-import ru.tilman.chambers.enterprise.services.ChamberService;
+import ru.tilman.chambers.enterprise.integration.CashMessageGateway;
+import ru.tilman.chambers.enterprise.integration.CashMessageHTTPGateway;
+import ru.tilman.chambers.enterprise.services.ChamberFeignService;
 
 import java.util.Date;
 import java.util.List;
@@ -23,11 +21,15 @@ public class RestChambersController {
     public static final String ASC = "ASC";
     public static final String ID = "id";
 
-    private final ChamberService chamberService;
+    private final ChamberFeignService chamberFeignService;
+    private CashMessageGateway cashMessageGateway;
+    private CashMessageHTTPGateway cashMessageHTTPGateway;
 
-    @Autowired
-    public RestChambersController(@Qualifier("chamberService") ChamberService chamberService) {
-        this.chamberService = chamberService;
+    @Autowired(required = false)
+    public RestChambersController(ChamberFeignService chamberFeignService, CashMessageGateway cashMessageGateway, CashMessageHTTPGateway cashMessageHTTPGateway) {
+        this.chamberFeignService = chamberFeignService;
+        this.cashMessageGateway = cashMessageGateway;
+        this.cashMessageHTTPGateway = cashMessageHTTPGateway;
     }
 
     @RequestMapping("/test")
@@ -44,16 +46,21 @@ public class RestChambersController {
             @RequestParam(value = "id", required = false) Integer id
     ) {
 
-        if (id != null) return chamberService.getChamberListById(id);
-        if (size == null) size = chamberService.getChambersSize();
+        List<Chamber> chamberList = chamberFeignService.getChambers();
+        Chamber chamber = chamberList.get(0);
+        cashMessageGateway.send(MessageBuilder
+                .withPayload(chamber)
+                .setHeader("CHAMBER", chamber.getId())
+                .build()
+        );
 
-        Sort sort = null;
-        if (order.equalsIgnoreCase(DESC)) sort = new Sort(Sort.Direction.DESC, orderBy);
-        else sort = new Sort(Sort.Direction.ASC, orderBy);
+        // TODO: 20.08.18 дебажить *5
+        cashMessageHTTPGateway.send(MessageBuilder
+                .withPayload(chamber)
+                .setHeader("CHAMBER_HTTP", chamber.getId())
+                .build()
+        );
 
-        PageRequest pageable = PageRequest.of(pageNumber, size, sort);
-        Page<Chamber> chamberPage = chamberService.getChambersPage(pageable);
-
-        return Lists.newArrayList(chamberPage.iterator());
+        return chamberList;
     }
 }

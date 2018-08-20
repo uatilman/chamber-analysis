@@ -7,10 +7,15 @@
     <artifactId>chamber-analysis</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <modules>
-        <!--<module>chambers-config</module>-->
-        <module>chambers-enterprise</module>
+        <module>chambers-config</module>
         <module>chambers-eureka</module>
+        <module>chambers-enterprise</module>
         <module>use-microservice</module>
+        <module>chambers-proxy</module>
+        <module>chambers-microservice</module>
+        <module>chambers-utils</module>
+        <module>chambers-inegration</module>
+
     </modules>
     <packaging>pom</packaging>
 
@@ -38,20 +43,12 @@
         <spring-cloud.version>Finchley.RELEASE</spring-cloud.version>
     </properties>
 
-        <!--<spring-cloud.version>Finchley.BUILD-SNAPSHOT</spring-cloud.version>-->
-
-
     <dependencies>
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
-
-        <!--<dependency>-->
-            <!--<groupId>org.springframework.boot</groupId>-->
-            <!--<artifactId>spring-boot-starter-web-services</artifactId>-->
-        <!--</dependency>-->
 
         <!-- горячая подмена, выключенный кеш для шаблонов, включенный live reload -> коомментарий для ситуации с раскомментированным тегом optional -->
         <dependency>
@@ -70,6 +67,16 @@
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-config</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-integration</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.integration</groupId>
+            <artifactId>spring-integration-http</artifactId>
         </dependency>
 
     </dependencies>
@@ -117,6 +124,16 @@
         </pluginRepository>
 
     </pluginRepositories>
-
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
 </project>

@@ -17,7 +17,7 @@ public class AppLogger {
 
     private static final Logger logger = LogManager.getLogger(ChamberAnalysisApplication.class);
 
-    @Pointcut("execution (* tilman.chamberanalysis.services..*.*(String))")
+    @Pointcut("execution (* ru.tilman.chambers.enterprise.services..*.*(String))")
     private void loggableServicesMethodsWithOneStringParameter() {
     }
 
