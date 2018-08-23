@@ -54,7 +54,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers(HttpMethod.GET, "/hi", "/rest/remove")
                 .hasAuthority("admins")
-                .antMatchers(HttpMethod.GET, "/chamber")
+                .antMatchers(HttpMethod.GET, "/getChamber")
                 .hasAnyAuthority("admins", "user")
 
                 .and()
