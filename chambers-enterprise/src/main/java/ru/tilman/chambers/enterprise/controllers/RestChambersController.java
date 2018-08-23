@@ -1,14 +1,12 @@
 package ru.tilman.chambers.enterprise.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import ru.tilman.chambers.enterprise.entity.Chamber;
-import ru.tilman.chambers.enterprise.integration.CashMessageGateway;
-import ru.tilman.chambers.enterprise.integration.CashMessageHTTPGateway;
 import ru.tilman.chambers.enterprise.services.ChamberFeignService;
+import ru.tilman.chambers.enterprise.services.ChamberService;
 
 import java.util.Date;
 import java.util.List;
@@ -22,19 +20,33 @@ public class RestChambersController {
     public static final String ID = "id";
 
     private final ChamberFeignService chamberFeignService;
-    private CashMessageGateway cashMessageGateway;
-    private CashMessageHTTPGateway cashMessageHTTPGateway;
+    private final ChamberService chamberService;
+
+    // TODO: 23.08.18 чтото сломалось в интеграции
+//    private CashMessageGateway cashMessageGateway;
+//    private CashMessageHTTPGateway cashMessageHTTPGateway;
 
     @Autowired(required = false)
-    public RestChambersController(ChamberFeignService chamberFeignService, CashMessageGateway cashMessageGateway, CashMessageHTTPGateway cashMessageHTTPGateway) {
+    public RestChambersController(ChamberFeignService chamberFeignService, ChamberService chamberService) {
         this.chamberFeignService = chamberFeignService;
-        this.cashMessageGateway = cashMessageGateway;
-        this.cashMessageHTTPGateway = cashMessageHTTPGateway;
+        this.chamberService = chamberService;
     }
+
+//    @Autowired(required = false)
+//    public RestChambersController(ChamberFeignService chamberFeignService, CashMessageGateway cashMessageGateway, CashMessageHTTPGateway cashMessageHTTPGateway) {
+//        this.chamberFeignService = chamberFeignService;
+//        this.cashMessageGateway = cashMessageGateway;
+//        this.cashMessageHTTPGateway = cashMessageHTTPGateway;
+//    }
 
     @RequestMapping("/test")
     public String test() {
         return new Date().toString();
+    }
+
+    @RequestMapping("/getChamber") // TODO: 09.08.18 add required = false instead defaultValue
+    public Chamber getChamber(@RequestParam(value = "id") Long id) {
+        return chamberService.getChamberById(id);
     }
 
     @RequestMapping("/getChambers") // TODO: 09.08.18 add required = false instead defaultValue
@@ -47,19 +59,19 @@ public class RestChambersController {
     ) {
 
         List<Chamber> chamberList = chamberFeignService.getChambers();
-        Chamber chamber = chamberList.get(0);
-        cashMessageGateway.send(MessageBuilder
-                .withPayload(chamber)
-                .setHeader("CHAMBER", chamber.getId())
-                .build()
-        );
-
-        // TODO: 20.08.18 дебажить *5
-        cashMessageHTTPGateway.send(MessageBuilder
-                .withPayload(chamber)
-                .setHeader("CHAMBER_HTTP", chamber.getId())
-                .build()
-        );
+//        Chamber getChamber = chamberList.get(0);
+//        cashMessageGateway.send(MessageBuilder
+//                .withPayload(getChamber)
+//                .setHeader("CHAMBER", getChamber.getId())
+//                .build()
+//        );
+//
+//        // TODO: 20.08.18 дебажить *5
+//        cashMessageHTTPGateway.send(MessageBuilder
+//                .withPayload(getChamber)
+//                .setHeader("CHAMBER_HTTP", getChamber.getId())
+//                .build()
+//        );
 
         return chamberList;
     }

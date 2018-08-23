@@ -21,6 +21,7 @@ public class ChamberService {
         this.chamberRepository = chamberRepository;
     }
 
+
     public List<Chamber> getChambersListByOrderByIdAsc() {
         return chamberRepository.findAllByOrderByIdAsc();
     }

@@ -18,7 +18,7 @@ public class ChamberMessageListener {
 
     @ServiceActivator(inputChannel = CashMessageGateway.CHANEL)
     public void handler(@Payload Chamber payloadChamber, @Header("CHAMBER") Long headerId) {
-        LOGGER.info("chamber id: " + headerId);
+        LOGGER.info("getChamber id: " + headerId);
         LOGGER.info("Chamber name: " + payloadChamber.getName());
     }
 

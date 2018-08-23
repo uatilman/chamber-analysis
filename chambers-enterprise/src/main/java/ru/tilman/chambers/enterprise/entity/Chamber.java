@@ -15,11 +15,9 @@ public class Chamber implements Serializable {
     @SequenceGenerator(name = "chamber_id_generator", initialValue = 204)
     private Long id;
 
-
     @Size(min = 4, max = 255, message = "{validation.name.size}")
     @Column(name = "name")
     private String name;
-
 
     @ManyToOne
     @JoinColumn(name = "region_id")
@@ -31,6 +29,7 @@ public class Chamber implements Serializable {
 
     @Column(name = "urlPortal")
     private String urlPortal;
+
 
     // TODO: 12.07.18
  /*   @OneToMany
